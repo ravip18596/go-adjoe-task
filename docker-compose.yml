@@ -1,0 +1,9 @@
+version: '3'
+services:
+  test-task:
+    image: adjoe/golang-dev
+    ports:
+      - "3333:3000"
+    volumes:
+      - ./:/go/src/adjoe.io
+    command: ["/bin/sh", "-c", "gin -t test-task/src run"]

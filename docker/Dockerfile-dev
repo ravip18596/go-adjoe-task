@@ -1,0 +1,9 @@
+FROM adjoe-test/golang-base
+
+RUN go get github.com/codegangsta/gin && \
+    go get github.com/onsi/ginkgo/ginkgo && \
+    go get github.com/derekparker/delve/cmd/dlv && \
+    go get github.com/onsi/gomega/...
+
+# Set the local PORT environment variable inside the container
+ENV PORT 3000
