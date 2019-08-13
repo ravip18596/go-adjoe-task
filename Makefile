@@ -22,6 +22,6 @@ rest:
 	@make logs
 
 bash:
-	docker-compose exec $(container) bash
+	docker-compose exec test-task bash
 help:
 	@echo "make container=adjoe_test-task_1 bash \t\t\t: exec a bash shell in the specific container"
