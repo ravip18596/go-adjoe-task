@@ -3,7 +3,7 @@ build:
 
 .PHONY: vendor
 vendor:
-	docker run --rm -e DEPCACHEDIR=/go/src/adjoe.io/.depcache -v ${CURDIR}:/go/src/adjoe.io adjoe/golang-dev dep ensure -v
+	docker run --rm -e DEPCACHEDIR=/go/src/adjoe.io/.depcache -v ${CURDIR}:/go/src/adjoe.io adjoe-test/golang-dev dep ensure -v
 up:
 	@make build
 	@make vendor
