@@ -3,7 +3,8 @@ build:
 
 .PHONY: vendor
 vendor:
-	docker run --rm -e DEPCACHEDIR=/go/src/adjoe.io/.depcache -v ${CURDIR}:/go/src/adjoe.io adjoe-test/golang-dev dep ensure -v
+	docker run --rm -e GO111MODULE=on -v `pwd`:/go/src/adjoe.io adjoe/golang-dev sh -c 'go mod tidy && go mod vendor'
+
 up:
 	@make build
 	@make vendor
