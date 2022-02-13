@@ -24,5 +24,9 @@ rest:
 
 bash:
 	docker-compose exec test-task bash
+
+aws-cli:
+	docker run --network=adjoe-test  adjoe-test/awscli --endpoint-url="http://localstack:4566" $(filter-out $@,$(MAKECMDGOALS))
+
 help:
 	@echo "make container=adjoe_test-task_1 bash \t\t\t: exec a bash shell in the specific container"
