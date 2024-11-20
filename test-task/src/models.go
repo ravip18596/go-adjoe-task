@@ -1,5 +1,7 @@
 package main
 
+import "time"
+
 type heartbeatResponse struct {
 	Status string `json:"status"`
 	Code   int    `json:"code"`
@@ -22,4 +24,11 @@ type SQSMessage struct {
 
 type RequestMessage struct {
 	Message string `json:"message"`
+}
+
+type TodoItem struct {
+	ID          int       `json:"id,omitempty"`
+	Description string    `json:"description,omitempty"`
+	DueDate     time.Time `json:"-"`
+	DueDateStr  string    `json:"due_date,omitempty"`
 }

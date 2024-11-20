@@ -12,11 +12,45 @@ import (
 
 /*
 CREATE TABLE test_ravi (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    sum DECIMAL(10, 2),  -- Adjust the precision and scale as needed
-    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	sum DECIMAL(10, 2),  -- Adjust the precision and scale as needed
+	date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
 );
 */
+func todoHandlerFunc(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	if mysql == nil {
+		mysql = InitMysql()
+	}
+	rows, err := mysql.Query("select id,description,dueDate from to_do_item order by dueDate desc limit 1;")
+	if err != nil {
+		logrus.Error("mysql query statement error: ", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		response := make(map[string]string)
+		response["error"] = err.Error()
+		_ = json.NewEncoder(w).Encode(response)
+	}
+	defer rows.Close()
+	var results []TodoItem
+	for rows.Next() {
+		var tr TodoItem
+		err := rows.Scan(&tr.ID, &tr.Description, &tr.DueDateStr)
+		if err != nil {
+			logrus.Error("Error scanning row: ", err)
+			continue
+		}
+		results = append(results, tr)
+	}
+	w.WriteHeader(http.StatusOK)
+	err = json.NewEncoder(w).Encode(results)
+	if err != nil {
+		logrus.WithFields(logrus.Fields{
+			"Error": err,
+		}).Error("Error json marshal response")
+	}
+}
 
 func addHandlerFunc(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")

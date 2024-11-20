@@ -12,6 +12,8 @@
   - If you import dependencies to your go code, please use `make stop` and `make up` again to automatically download them
   - To access the sql server, use mysql:3306 as address and Port.
   - In your go application you have to use the eu-central-1 region to access aws localstack
+- In localstack, run `aws configure` and set `test` as aws access id and aws secret. It will allow sqs queue to connect from go client
+- To start the program, please hit the heartbeart URL - [http://localhost:3333/](http://localhost:3333/)
 
 ## URLs
 
