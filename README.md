@@ -1,4 +1,4 @@
-# go-test-task
+# go-adjoe-task
 **how to use**
 
 - To start, please install: docker, docker-compose and go
@@ -10,5 +10,5 @@
   - `make aws-cli foo bar` to execute the aws cli with parameters foo bar
   - `make aws-cli sqs list-queues` to access the sqs queue on aws localstack
   - If you import dependencies to your go code, please use `make stop` and `make up` again to automatically download them
-  - To access the sql server, use mysql:3306 as adress and Port.
+  - To access the sql server, use mysql:3306 as address and Port.
   - In your go application you have to use the eu-central-1 region to access aws localstack
